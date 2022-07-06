@@ -19,6 +19,9 @@ https://medium.com/swlh/docker-swarm-tutorial-deploying-spring-boot-microservice
 ## Create new security Group named docker
 
 ### INBOUND
+![image](https://user-images.githubusercontent.com/30776949/177515678-520c211b-7628-4c05-b7e3-7f39573903bb.png)
+N.B: Make sure HTTP is open on both Anywhere IPV4 and APV6
+
 ![image](https://user-images.githubusercontent.com/30776949/177512900-b35ea94e-deae-4195-844f-59baf4fa3c47.png)
 
 ### OUTBOUND
