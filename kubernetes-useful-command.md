@@ -14,6 +14,7 @@
 
 ## Deployment in Cluster using IMPERATIVE APPROACH
 ```kubectl create deployment first-app --image=niyoceles/node-web-application```
+
 ```......................... app name ..image (from docker registry)```
 ## Get all deployments
 ```kubectl get deployments```
