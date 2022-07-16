@@ -1,4 +1,8 @@
-# Deploy Kubernetes On AWS EC2
+# Deploy application in Kubernetes On AWS EC2 with kubeadm
+
+## Let have two instances
+- master
+- worker1 (you may have multiple worker machine but let have one)
 
 ## 1. On each server, install Docker
 (Follow Installation guide: https://docs.docker.com/engine/install/ubuntu/)
