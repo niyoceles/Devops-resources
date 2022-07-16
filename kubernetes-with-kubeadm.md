@@ -36,3 +36,21 @@ kubectl apply -f https://raw.githubusercontent.com/cor...
 7. On the Worker servers only, join them to the cluster using the command you copied earlier. 
 kubeadm join 172.31.37.80:6443 --token ... --discovery-token-ca-cert-hash ...
 
+
+YOUTUBE VIDEO https://youtu.be/vpEDUmt_WKA
+
+## ISUUE 
+# Configure containerd
+mkdir -p /etc/containerd
+containerd config default > /etc/containerd/config.toml
+systemctl restart containerd
+
+kubeadm init
+...
+[preflight] Running pre-flight checks
+error execution phase preflight: [preflight] Some fatal errors occurred:
+	[ERROR CRI]: container runtime is not running: output: time="2020-09-24T11:49:16Z" level=fatal msg="getting status of runtime failed: rpc error: code = Unimplemented desc = unknown service runtime.v1alpha2.RuntimeService"
+, error: exit status 1
+
+## SOLUTION https://github.com/containerd/containerd/issues/4581#issue-708113921
+
