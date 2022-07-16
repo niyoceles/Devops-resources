@@ -1,14 +1,25 @@
 # Deploy Kubernetes On AWS EC2
 
 ## 1. On each server, install Docker
-(Installation guide: https://docs.docker.com/engine/instal...)
-curl -fsSL https://download.docker.com/linux/ubu... | sudo apt-key add -
+(Follow Installation guide: https://docs.docker.com/engine/install/ubuntu/)
+
+ - sudo apt-get update
+ 
+ - sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+    
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 sudo apt-get update
 sudo apt-get install -y docker-ce
 
-2. On each server, install kubernetes
-(Installation guide: https://kubernetes.io/docs/setup/prod...)
+## 2. On each server, install kubernetes
+(Installation guide: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 curl -s https://packages.cloud.google.com/apt... | sudo apt-key add -
 cat &lt&lt EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
@@ -16,24 +27,24 @@ EOF
 sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 
-3. On each server, enable the use of iptables 
+## 3. On each server, enable the use of iptables 
 echo "net.bridge.bridge-nf-call-iptables=1" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 
-4. On the Master server only, initialize the cluster
+## 4. On the Master server only, initialize the cluster
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 
 (After this command finishes, copy kubeadm join provided)
 
-5. On the Master server only, set up the kubernetes configuration file for general usage
+## 5. On the Master server only, set up the kubernetes configuration file for general usage
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-6. On the Master server only, apply a common networking plugin. In this case, Flannel
-kubectl apply -f https://raw.githubusercontent.com/cor...
+## 6. On the Master server only, apply a common networking plugin. In this case, Flannel
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
-7. On the Worker servers only, join them to the cluster using the command you copied earlier. 
+## 7. On the Worker servers only, join them to the cluster using the command you copied earlier. 
 kubeadm join 172.31.37.80:6443 --token ... --discovery-token-ca-cert-hash ...
 
 
