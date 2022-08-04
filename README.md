@@ -1,6 +1,6 @@
 # Devops-resources
 
-## In this reposititory will be added How to configure some usefull tools and software in *Devops*
+## In this reposititory will be added How to configure some usefull tools and software in **Devops**
 
 - Docker
 - Kubernetes
