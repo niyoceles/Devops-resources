@@ -1,0 +1,9 @@
+---
+- name: Install python in target node with ansible
+  hosts: My_Group
+  become: true
+  pre_tasks:
+    - name: install python
+      raw: sudo apt install python3
+      args:
+        executable: /bin/bash

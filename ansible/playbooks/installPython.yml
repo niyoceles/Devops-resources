@@ -1,0 +1,10 @@
+---
+- name: install python playbook
+  hosts: all
+  become: true
+
+  tasks:
+    - name: install python
+      apt:
+        name: python3
+        state: latest
